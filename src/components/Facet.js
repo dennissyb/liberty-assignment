@@ -13,19 +13,19 @@ const Facet = (props) => {
       <form>
         <div className="radio">
           <label>
-            <input type="radio" value="Nike" onClick={(e) => onFacetSelect(items,e)}  onFacetSelect={props.handleShoeSelect} />
+            <input type="radio" value="Nike" onClick={(e) => onFacetSelect(e)}  />
             Nike
           </label>
         </div>
         <div className="radio">
           <label>
-            <input type="radio" value="Reebok" onClick={(e) => onFacetSelect(items,e)} onFacetSelect={props.handleShoeSelect}/>
+            <input type="radio" value="Reebok" onClick={(e) => onFacetSelect(e)}/>
             Reebok
           </label>
         </div>
         <div className="radio">
           <label>
-            <input type="radio" value="Adidas" onClick={(e) => onFacetSelect(items,e)} onFacetSelect={props.handleShoeSelect}/>
+            <input type="radio" value="Adidas" onClick={(e) => onFacetSelect(e)}/>
             Adidas
           </label>
         </div>

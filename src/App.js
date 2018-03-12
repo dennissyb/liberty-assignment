@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import NavBar from './components/NavBar';
 import ShoeList from './components/ShoeList';
-import Cart from './components/CartSummary';
+import CartSummary from './components/CartSummary';
 import Facet from './components/Facet';
 import Api from './api';
+import $ from 'jquery';
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
 class App extends Component {
 
@@ -37,19 +39,32 @@ class App extends Component {
       .then(data => {
         const shoes = data;
 
-        this.setState({shoes: shoes, cart: shoes});
+        this.setState({shoes: shoes, cart:[]});
       });
   }
 
   handleShoeSelect(shoe) {
 
-    this.state.cart.push(shoe);
-    this.setState({cart: this.state.cart})
+    var foundShoe = $.grep(this.state.cart, function (e) {
+      return (e.id == shoe.id)
+    })[0];
+
+    if (foundShoe != undefined) 
+      return console.log("Shoe already added to cart");
+    else {
+      this.state.cart.push(shoe);
+      this.setState({cart: this.state.cart});
+      console.log("Shoe added successfully to cart");
+
+    }
   }
 
-  handleFacetSelect(e)
+  handleFacetSelect(event)
   {
-    this.state.facetSelected = e.target.value;
+    this.setState
+    {
+      facetSelected : event.target.value;
+    }
   }
 
   render() {
@@ -57,7 +72,6 @@ class App extends Component {
       <div>
 
         <NavBar title="My App Store"/>
-
         <div className="row">
 
           <div className="col s3"></div>
@@ -70,7 +84,7 @@ class App extends Component {
           </div>
 
           <div className="col s3">
-            <Cart cart={this.state.cart}/>
+            <CartSummary cart={this.state.cart}/>
           </div>
 
         </div>
